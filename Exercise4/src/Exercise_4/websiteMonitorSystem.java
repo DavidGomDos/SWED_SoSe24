@@ -1,3 +1,5 @@
+package Exercise_4;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ public class websiteMonitorSystem {
         this.websiteSubscribers = new HashMap<>();
         this.subscriptions = new HashMap<>();
     }
+
     //maps befüllen
 
     public void register(User user, Website website){
@@ -20,11 +23,15 @@ public class websiteMonitorSystem {
         websiteSubscribers.put(website, new ArrayList<>());
         websiteSubscribers.get(website).add(user);
 
-        List <Website> websites = subscriptions.get(user);
+        //List <Website> websites = subscriptions.get(user); ??
 
-        System.out.println(user.getName() + " has subscribed to " + website.getUrl());
+        System.out.println("Subscriptions:");
+        for (Map.Entry<User, List<Website>> entry : subscriptions.entrySet()) {
+            System.out.println(entry.getKey().getName() + " → " +
+                    entry.getValue().stream().map(Website::getUrl).toList());
+        }
 
-        //System.out.println(user.getName() + website.getUrl());
+
     }
 
     public void checkForUpdates(){
@@ -33,16 +40,16 @@ public class websiteMonitorSystem {
                 notifyUsers(website);
         };
     }
-
+/*
     public void notifyUsers(Website website){
         List<User> users = websiteSubscribers.get(website);
         for (User user : users) {
-            String message = "Website " + website.getUrl() + " has a new update: " + website.getUpdate();
+            String message = "Exercise_4.Website " + website.getUrl() + " has a new update: " + website.getUpdate();
             sendNotification(user, message);
         }
     }
 
-    public void sendNotification(User user,String msg){
+    public void sendNotification(User user, String msg){
         System.out.println("\n");
         if(user.getChannel() == "email"){
             System.out.printf("e-mail to " + user.getEmail()+" "+ msg );
@@ -52,20 +59,23 @@ public class websiteMonitorSystem {
     }
 
     public void modifySubscription(User user, Website oldWebsite, Website newWebsite) {
-        if (subscriptions.containsKey(user)) {
-            subscriptions.get(user).remove(oldWebsite);
-            subscriptions.get(user).add(newWebsite);
+        if (this.subscriptions.containsKey(user)) {
+            ((List)this.subscriptions.get(user)).remove(oldWebsite);
+            ((List)this.subscriptions.get(user)).add(newWebsite);
             System.out.println(user.getName() + " modified the subscription from: " + oldWebsite.getUrl() + " to " + newWebsite.getUrl());
         }
     }
 
     public void cancelSubscription(User user, Website website) {
-        if (subscriptions.containsKey(user)) {
-            subscriptions.get(user).remove(website);
-            websiteSubscribers.get(website).remove(user);
+        if (this.subscriptions.containsKey(user)) {
+            ((List)this.subscriptions.get(user)).remove(website);
+            ((List)this.websiteSubscribers.get(website)).remove(user);
             System.out.println(user.getName() + " canceled the subscription for: " + website.getUrl());
         }
     }
-
+*/
 
 }
+
+
+

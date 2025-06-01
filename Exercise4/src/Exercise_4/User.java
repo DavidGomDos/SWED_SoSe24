@@ -1,3 +1,5 @@
+package Exercise_4;
+
 public class User {
    private String name;
    private String email;
