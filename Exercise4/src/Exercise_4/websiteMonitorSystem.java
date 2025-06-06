@@ -35,9 +35,8 @@ public class websiteMonitorSystem {
     }
 
     public void checkForUpdates(){
-        for(Website website : websiteSubscribers.keySet()){
-                website.setUpdate("New update available\n");
-                notifyUsers(website);
+        for(Website website : websiteSubscribers.keySet()){ // für jede INstanz der Klasse Website
+
         };
     }
 /*

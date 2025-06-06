@@ -7,10 +7,12 @@ public class User {
 
 
    //Constructor
-   User( String name, String email, String channel){
+   User( String name, String channel, String email){
       this.name = name;
       this.email = email;
       this.channel = channel;
+
+
    }
 
    //Getter

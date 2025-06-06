@@ -42,7 +42,7 @@ public class Website2 {
 
 public class Website {
     private String url;
-
+    private String lastHtml = "";
     public Website(String url) {
         this.url = url;
     }
@@ -64,4 +64,13 @@ public class Website {
     public String getUrl() {
         return url;
     }
+
+    public boolean hasChanged() throws IOException, InterruptedException{
+        String aktuelleHtml = getHtml();
+        boolean changed = !aktuelleHtml.equals(lastHtml);
+        lastHtml=aktuelleHtml;
+        return changed;
+    }
+
+
 }
