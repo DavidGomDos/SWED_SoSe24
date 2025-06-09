@@ -65,6 +65,7 @@ public class Website {
         return url;
     }
 
+
     public boolean hasChanged() throws IOException, InterruptedException{
         String aktuelleHtml = getHtml();
         boolean changed = !aktuelleHtml.equals(lastHtml);

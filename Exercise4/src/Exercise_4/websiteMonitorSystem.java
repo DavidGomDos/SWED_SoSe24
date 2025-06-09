@@ -39,8 +39,8 @@ public class websiteMonitorSystem {
 
         };
     }
-/*
-    public void notifyUsers(Website website){
+
+    public void notifyUsers(Website website){ // Verfasse Nachricht
         List<User> users = websiteSubscribers.get(website);
         for (User user : users) {
             String message = "Exercise_4.Website " + website.getUrl() + " has a new update: " + website.getUpdate();
@@ -48,7 +48,7 @@ public class websiteMonitorSystem {
         }
     }
 
-    public void sendNotification(User user, String msg){
+    public void sendNotification(User user, String msg){ //Verschicke Nachricht
         System.out.println("\n");
         if(user.getChannel() == "email"){
             System.out.printf("e-mail to " + user.getEmail()+" "+ msg );
@@ -56,7 +56,7 @@ public class websiteMonitorSystem {
             System.out.printf("sms to " + user.getName() +" "+ msg);
         }
     }
-
+/*
     public void modifySubscription(User user, Website oldWebsite, Website newWebsite) {
         if (this.subscriptions.containsKey(user)) {
             ((List)this.subscriptions.get(user)).remove(oldWebsite);
