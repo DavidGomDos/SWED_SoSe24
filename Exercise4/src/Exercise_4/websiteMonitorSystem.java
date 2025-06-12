@@ -1,5 +1,6 @@
 package Exercise_4;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,29 +35,41 @@ public class websiteMonitorSystem {
 
     }
 
-    public void checkForUpdates(){
-        for(Website website : websiteSubscribers.keySet()){ // für jede INstanz der Klasse Website
+    public void checkForUpdates(User user)  {
+        for(Website website : websiteSubscribers.keySet()) { // für jede INstanz der Klasse Website
+            boolean changed = false;
+            try {
+                changed = website.hasChanged();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        };
-    }
+            if (changed == true) {
+                notifyUsers(website);
+            } else {
+                System.out.println(website.getUrl() + " hat kein update");
+            }
+        }
+            ;
+        }
 
     public void notifyUsers(Website website){ // Verfasse Nachricht
         List<User> users = websiteSubscribers.get(website);
         for (User user : users) {
-            String message = "Exercise_4.Website " + website.getUrl() + " has a new update: " + website.getUpdate();
+            String message = website + website.getUrl() + " has a new update: ";
             sendNotification(user, message);
         }
     }
 
     public void sendNotification(User user, String msg){ //Verschicke Nachricht
         System.out.println("\n");
-        if(user.getChannel() == "email"){
+        if(user.getChannel() == "e-mail"){
             System.out.printf("e-mail to " + user.getEmail()+" "+ msg );
         }else {
             System.out.printf("sms to " + user.getName() +" "+ msg);
         }
     }
-/*
+
     public void modifySubscription(User user, Website oldWebsite, Website newWebsite) {
         if (this.subscriptions.containsKey(user)) {
             ((List)this.subscriptions.get(user)).remove(oldWebsite);
@@ -72,7 +85,7 @@ public class websiteMonitorSystem {
             System.out.println(user.getName() + " canceled the subscription for: " + website.getUrl());
         }
     }
-*/
+
 
 }
 

@@ -3,13 +3,15 @@ package Exercise_4;
 public class User {
    private String name;
    private String email;
+   private String sms;
    private String channel;
 
 
    //Constructor
-   User( String name, String channel, String email){
+   User( String name, String channel, String email,String sms){
       this.name = name;
       this.email = email;
+      this.sms = sms;
       this.channel = channel;
 
 
@@ -27,6 +29,7 @@ public class User {
    public String getChannel(){
          return channel;
    }
+   public String getSms(){return sms;}
 
    //Setter
    public void setName(String name){
@@ -39,5 +42,6 @@ public class User {
    public void setChannel(String channel){
       this.channel = channel;
    }
+   public void setSms(String sms){this.sms = sms;}
 
 }

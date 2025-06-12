@@ -22,51 +22,36 @@ public class Main {
         String jedipediaHtml2 = "";
         String cnnHtml2 ="";
         try {
-            System.out.println(jedipedia.getHtml());
+            //System.out.println(jedipedia.getHtml());
              jedipediaHtml = jedipedia.getHtml();
-            System.out.println(cnn.getHtml());
+            //System.out.println(cnn.getHtml());
              cnnHtml = cnn.getHtml();
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }  // Brauche ich einen try-catch block für jede Webseite ??
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            System.out.println(jedipedia.getHtml());
-           jedipediaHtml = jedipedia.getHtml();
-            System.out.println(cnn.getHtml());
-            cnnHtml = cnn.getHtml();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("HTML ERROR");
         }  // Brauche ich einen try-catch block für jede Webseite ??
 
 
 
-        boolean changed1 = false;
-        boolean changed2 = false;
-        try {
-            changed1 = jedipedia.hasChanged();
-            changed2 = cnn.hasChanged();
-        }catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        if (changed1 == true){
-            System.out.println("jedipedia hat ein update");
-        }else{
-            System.out.println("jedipedia ist gleich");}
-
-
-        User mike = new User("Mike","e-mail","mike@gmail.com");
-        User Harry = new User("Harry","sms-boomer","harry@gmail.com");
-        monitor.register(Harry,jedipedia);
-        monitor.register(Harry,cnn);
+        User mike = new User("Mike","e-mail","mike@gmail.com","01234");
+        User harry = new User("Harry","sms-boomer","harry@gmail.com","55566");
+        monitor.register(harry,jedipedia);
+        monitor.register(harry,cnn);
         monitor.register(mike,jedipedia);
+
+        monitor.cancelSubscription(harry,jedipedia);
+        monitor.modifySubscription(mike,jedipedia,cnn); // mike wechselt von jedipedia zu cnn
+
+        //while loop checks website every 45 seconds
+        while (true){
+        monitor.checkForUpdates(mike);
+        monitor.checkForUpdates(harry);
+            try {
+                Thread.sleep(45000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
